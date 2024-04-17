@@ -1,0 +1,127 @@
+.drawer-toggle-btn {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 799;
+}
+
+.drawer-container {
+  width: 50%;
+  height: 100%;
+  position: fixed;
+  max-width: 700px;
+  top: 0;
+  left: -50%;
+  background-color: var(--background-color);
+  overflow-x: hidden;
+  transition: left 0.3s ease;
+  z-index: 800;
+  border-radius: 0px 18px 18px 0px;
+}
+[data-theme="dark"] .drawer-container {
+  background-color: var(--dark-black);
+}
+
+.drawer-container::before {
+  content: "";
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: var(--background-color);
+  transform: translateX(-100%);
+}
+
+.drawer-container.open {
+  left: 80px;
+}
+
+.drawer-container.closed {
+  left: -50%;
+}
+.drawer-content__inner__header__bottom {
+  position: sticky;
+  bottom: 0;
+  padding: 10px;
+  padding-bottom: 17px;
+  background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.drawer-content__inner {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+.drawer-content__inner__header__main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.sidebar-form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.form-groupe__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+}
+.form-groupe__row .form-field {
+  flex: 1;
+}
+.form-group span:nth-child(1) {
+  color: var(--dark-purple);
+  font-size: 1.1rem;
+  text-transform: capitalize;
+}
+@media screen and (max-width: 900px) {
+  .drawer-container.open {
+    left: 0;
+  }
+  .drawer-container {
+    width: 80%;
+    top: 80px;
+  }
+  .drawer-container {
+    height: calc(100% - 80px);
+  }
+  .drawer-container.closed {
+    left: -80%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .drawer-container {
+    width: 100%;
+  }
+  .drawer-container.closed {
+    left: -100%;
+  }
+}

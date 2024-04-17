@@ -1,0 +1,31 @@
+.menu {
+  width: 100%;
+  min-height: 80px;
+  background-color: var(--dark-purple);
+}
+.menu-inner {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 20px;
+}
+.menu-inner__last-container-sub-menu {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+.menu-inner__first-container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.menu-inner__first-container span {
+  color: var(--smokey-white);
+}
+.menu-inner__first-container svg {
+  fill: var(--background-color);
+}

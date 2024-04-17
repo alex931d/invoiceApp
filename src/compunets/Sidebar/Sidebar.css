@@ -1,0 +1,115 @@
+.sidebar {
+  min-width: 80px;
+  min-height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  background-color: var(--light-black);
+  border-radius: 0px 18px 18px 0px;
+}
+.sidebar__inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  flex: 1;
+}
+.sidebar__inner__header {
+  min-height: 80px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: var(--dark-purple);
+  border-radius: 0px 18px 18px 18px;
+}
+.sidebar__inner__header svg {
+  position: absolute;
+  inset: calc(50% - 28px / 2);
+  fill: var(--background-color);
+}
+.art-right {
+  width: 100%;
+  height: 50%;
+  background-color: var(--dark-purple);
+  border-radius: 18px 18px 18px 0px;
+}
+.art-left {
+  width: 100%;
+  height: 50%;
+  border-radius: 18px 0px 18px 0px;
+  background-color: var(--dark-purple-hover);
+}
+.sidebar__inner__last {
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  aspect-ratio: 1;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+  background-color: var(--smokey-white);
+  cursor: pointer;
+}
+.profile-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.profile-editor__inner {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  background-color: var(--dark-black);
+  border: 2px solid var(--dark-purple);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.profile-image-ontop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  opacity: 1;
+  justify-content: center;
+  gap: 40px;
+  transition: all 0.5s ease-in-out;
+}
+.profile-image-ontop span {
+  color: white;
+  text-align: center;
+}
+.profile-editor__inner input[type="file"] {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  z-index: 1;
+  position: absolute;
+  inset: 0;
+  outline: none;
+  cursor: pointer;
+  opacity: 0;
+}
+.profile-editor__inner input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  height: 100%;
+  border-radius: 10px;
+}
