@@ -1,0 +1,40 @@
+.status {
+  height: 100%;
+  min-width: 80px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+}
+.status__circle {
+  width: 8px;
+  height: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+.status__text {
+  text-transform: capitalize;
+  font-weight: bold;
+}
+.status[data-status="paid"] {
+  color: #33d69f;
+  background-color: #33d6a01d;
+}
+.status[data-status="paid"] .status__circle {
+  background-color: #33d69f;
+}
+.status[data-status="draft"] {
+  color: #373b53;
+  background-color: #373b531d;
+}
+.status[data-status="draft"] .status__circle {
+  background-color: #373b53;
+}
+.status[data-status="pending"] {
+  color: #ff8f00;
+  background-color: #ff8f001d;
+}
+.status[data-status="pending"] .status__circle {
+  background-color: #ff8f00;
+}

@@ -1,0 +1,201 @@
+.dashboard-inner__main.invoice-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100vh;
+  position: relative;
+}
+.invoice-edit__back {
+  display: flex;
+  align-self: flex-start;
+}
+.invoice-edit .submenu {
+  background-color: var(--background-color);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 2px 17px 20px -26px var(--dark-blue);
+}
+.invoice-edit .submenu__first {
+  height: 40px;
+}
+.submenu__first__row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 100%;
+}
+.dashboard-inner__main__invoice {
+  background-color: var(--background-color);
+  border-radius: 15px;
+  padding: 20px;
+  width: 100%;
+  position: relative;
+  height: 100%;
+  box-shadow: 2px 17px 20px -26px var(--dark-blue);
+}
+.invoice-details {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+.invoice-details__header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px;
+  padding: 35px;
+}
+.invoice-details__header__first {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.invoice-details__header__first__wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.invoice-details__header__last {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  justify-content: flex-end;
+}
+.invoice-details__subheader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.invoice-details__subheader__first {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+.invoice-details__subheader__column .email {
+  word-break: break-all;
+}
+.invoice-details__subheader .invoice-details__subheader__column {
+  width: calc(100% / 3);
+}
+.invoice-details__subheader__last {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+.invoice-details__subheader__column {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5px;
+}
+.invoice-details__items {
+  width: 100%;
+  background-color: var(--smokey-white);
+  display: flex;
+  border-radius: 15px;
+  flex-direction: column;
+  gap: 10px;
+}
+.invoice-details__items__wrapper {
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: scroll;
+  max-height: 130px;
+}
+
+.invoice-details__items__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.invoice-details__items__item span:first-child {
+  width: 50%;
+}
+
+.invoice-details__items__item span:not(:first-child) {
+  width: calc(50% / 3);
+  display: flex;
+  justify-content: flex-end;
+}
+.invoice-details__items__bottom {
+  width: 100%;
+  padding: 35px;
+  padding-top: 20px;
+  display: flex;
+  border-radius: 0px 0px 15px 15px;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--background-color);
+  background-color: var(--dark-third-black);
+}
+.invoice-details__items__bottom span {
+  color: white;
+}
+.invoice-details__items__bottom span:last-child {
+  font-size: 1.35rem;
+}
+
+.dashboard-inner__main__invoice__bottom--mobile {
+  width: 100%;
+  position: sticky;
+  left: 0;
+  padding: 20px;
+  bottom: 0;
+  display: flex;
+  background-color: var(--background-color);
+  gap: 20px;
+  align-items: center;
+  justify-content: flex-end;
+}
+.dashboard-inner__main__invoice__bottom--mobile {
+  display: none;
+}
+@media screen and (max-width: 600px) {
+  .dashboard-inner__main__invoice__bottom--mobile {
+    display: flex;
+  }
+  .submenu {
+    padding: 20px;
+  }
+  .submenu__last button {
+    display: none;
+  }
+  .submenu__first .submenu__first__row {
+    justify-content: space-between;
+    width: 100%;
+    flex: 1;
+  }
+  .submenu__first {
+    width: 100%;
+  }
+  .invoice-details__header__first__wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .invoice-details__header__last {
+    align-items: flex-start;
+  }
+  .invoice-details__subheader__first {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .dashboard .dashboard-inner .dashboard-inner__main.invoice-edit {
+    min-height: 100%;
+    height: auto;
+  }
+  .dashboard-inner {
+    min-height: auto;
+  }
+  .invoice-details__subheader .invoice-details__subheader__column {
+    width: calc(100% / 2);
+  }
+}
