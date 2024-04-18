@@ -8,7 +8,7 @@ const isLocalhost =
   );
 const API_URL = isLocalhost
   ? "http://localhost:3000" // express port change later
-  : "https://invoiceapp-46lb.onrender.com/"; // website
+  : "https://linksharingapp.onrender.com/"; // website
 
 const axiosInstance = axios.create({
   withCredentials: true,
