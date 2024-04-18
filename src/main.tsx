@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <QueryClientProvider client={queryClient}>
         <AuthProvider store={store}>
           <APIContextProvider>
-            <BrowserRouter basename="/invoiceApp/">
+            <BrowserRouter>
               <App />
             </BrowserRouter>
           </APIContextProvider>
