@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://invoiceappfrontend.onrender.com/login/",
+  "homepage": "https://invoiceappfrontend.onrender.com/",
   "proxy": "https://invoiceapp-46lb.onrender.com/",
   "scripts": {
     "dev": "vite",
