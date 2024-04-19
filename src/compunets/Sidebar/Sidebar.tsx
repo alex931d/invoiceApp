@@ -115,15 +115,16 @@ function Sidebar({ toggleDrawer, isOpen, user, data, invoice }: SidebarProps) {
                 <p className="main-para">
                   only 1280 width - 1280 height images allowed
                 </p>
-                <img
-                  className="profile-editor__inner"
-                  src={
-                    profileImage ||
-                    (user.avatar !== "default" ? user.avatar : sun)
-                  }
-                  alt=""
-                  crossOrigin="anonymous"
-                >
+                <div className="profile-editor__container">
+                  <img
+                    className="profile-editor__inner"
+                    src={
+                      profileImage ||
+                      (user.avatar !== "default" ? user.avatar : sun)
+                    }
+                    alt=""
+                    crossOrigin="anonymous"
+                  />
                   <Field
                     type="file"
                     name="avatar"
@@ -134,7 +135,7 @@ function Sidebar({ toggleDrawer, isOpen, user, data, invoice }: SidebarProps) {
                   <div className="profile-image-ontop">
                     <span className="heading-M">Change profile picture</span>
                   </div>
-                </img>
+                </div>
               </div>
 
               <div className="form-field">
