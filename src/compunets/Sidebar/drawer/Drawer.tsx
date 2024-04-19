@@ -200,7 +200,6 @@ const Drawer = ({ isOpen, toggleDrawer, data, invoice }: DrawerProps) => {
                           name="address"
                           placeholder={currentInvoice?.address}
                           className="input"
-                          value={currentInvoice?.address}
                         />
                       </div>
                       <ErrorMessage
