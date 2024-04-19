@@ -3,7 +3,7 @@ interface User {
   _id: string | number;
   email: string;
   role: string;
-  avatar: string | Blob;
+  avatar: string;
   projects: Project[];
 }
 interface Data {

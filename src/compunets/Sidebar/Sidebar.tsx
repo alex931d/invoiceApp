@@ -67,21 +67,17 @@ function Sidebar({ toggleDrawer, isOpen, user, data, invoice }: SidebarProps) {
               checkedChildren={<img src={moon} alt=""></img>}
               unCheckedChildren={<img src={sun} alt=""></img>}
             />
-            <div
+            <img
+              className="profile-icon"
               onClick={() => {
                 setProfileModal(true);
               }}
-              style={{
-                backgroundImage: `url('${
-                  profileImage
-                    ? profileImage
-                    : user.avatar !== "default"
-                    ? user.avatar
-                    : sun
-                }')`,
-              }}
-              className="profile-icon"
-            ></div>
+              src={
+                profileImage || (user.avatar !== "default" ? user.avatar : sun)
+              }
+              alt=""
+              crossOrigin="anonymous"
+            />
           </div>
         </div>
       </div>
