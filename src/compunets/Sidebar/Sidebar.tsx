@@ -5,6 +5,7 @@ import Switch from "./switch/Switch";
 import Drawer from "./drawer/Drawer";
 import { Invoice, User, Project } from "../../models/generalModels";
 import * as Yup from "yup";
+import { motion } from "framer-motion";
 import { updateUser as UpdateUser } from "../../lib/userUpdate";
 import { APIContext } from "../../contexts/mainContext";
 
@@ -64,10 +65,37 @@ function Sidebar({ toggleDrawer, isOpen, user, data, invoice }: SidebarProps) {
           </div>
           <div className="sidebar__inner__last">
             <Switch
-              checkedChildren={<img src={moon} alt=""></img>}
-              unCheckedChildren={<img src={sun} alt=""></img>}
+              checkedChildren={
+                <motion.img
+                  src={moon}
+                  alt=""
+                  whileTap={{ scale: 0.9 }}
+                  whileHover={{
+                    scale: 1.05,
+                  }}
+                  transition={{ bounceDamping: 10, stiffness: 600 }}
+                ></motion.img>
+              }
+              unCheckedChildren={
+                <motion.img
+                  src={sun}
+                  alt=""
+                  whileTap={{ scale: 0.9 }}
+                  whileHover={{
+                    scale: 1.05,
+                  }}
+                  transition={{ bounceDamping: 10, stiffness: 600 }}
+                ></motion.img>
+              }
             />
-            <img
+            <motion.img
+              whileTap={{ scale: 0.9 }}
+              whileHover={{
+                scale: 1.05,
+                backgroundColor: "#ffffff",
+                color: "black",
+              }}
+              transition={{ bounceDamping: 10, stiffness: 600 }}
               className="profile-icon"
               onClick={() => {
                 setProfileModal(true);
@@ -77,7 +105,7 @@ function Sidebar({ toggleDrawer, isOpen, user, data, invoice }: SidebarProps) {
               }
               alt=""
               crossOrigin="anonymous"
-            />
+            ></motion.img>
           </div>
         </div>
       </div>

@@ -4,6 +4,8 @@ import Sidebar from "../../../../compunets/Sidebar/Sidebar";
 import { Select } from "antd";
 import EmptyIllustration from "../../../../assets/illustration-empty.svg";
 import Invoice from "../../../../compunets/Invoice/Invoice";
+import { motion } from "framer-motion";
+import { useDarkMode } from "../../../../contexts/themeContext";
 import {
   Project,
   User,
@@ -22,6 +24,7 @@ interface DashboardProps {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Dashboard({ isOpen, toggleDrawer, user, data }: DashboardProps) {
   const [currentData, setCurrentData] = useState(data);
+  const { darkMode } = useDarkMode();
   useEffect(() => {
     setCurrentData(data);
   }, [data]);
@@ -103,28 +106,57 @@ function Dashboard({ isOpen, toggleDrawer, user, data }: DashboardProps) {
                     </div>
                   </div>
 
-                  <button onClick={toggleDrawer} className="btn add-btn">
+                  <motion.button
+                    onClick={toggleDrawer}
+                    className="btn add-btn"
+                    whileTap={{ scale: 0.9 }}
+                    whileHover={{
+                      scale: 1.05,
+                      backgroundColor: darkMode ? "#ffffff" : "#000000",
+                      color: darkMode ? "#000000" : "#ffffff",
+                    }}
+                    transition={{ bounceDamping: 10, stiffness: 600 }}
+                  >
                     <div className="img">
                       <img src={iconPlus} alt=""></img>
                     </div>
                     new invoice
-                  </button>
+                  </motion.button>
                 </div>
               </nav>
             </div>
             <div className="dashboard-inner__main__invoices">
-              <div className="dashboard-inner__main__invoices__inner">
+              <motion.div
+                className="dashboard-inner__main__invoices__inner"
+                variants={{
+                  start: { opacity: 0, x: -30 },
+                  end: {
+                    opacity: 1,
+                    x: 0,
+                    transition: { staggerChildren: 0.3 },
+                  },
+                }}
+                initial="start"
+                animate="end"
+              >
                 {data.invoices.length > 0 ? (
                   <>
                     {currentData.invoices.map((item, index) => (
-                      <Invoice
-                        uuid={item.uuid}
-                        date={item.date}
-                        client={item.client}
-                        amount={item.amount}
-                        status={item.status}
+                      <motion.div
                         key={index}
-                      />
+                        variants={{
+                          start: { opacity: 0, x: -30 },
+                          end: { opacity: 1, x: 0 },
+                        }}
+                      >
+                        <Invoice
+                          uuid={item.uuid}
+                          date={item.date}
+                          client={item.client}
+                          amount={item.amount}
+                          status={item.status}
+                        />
+                      </motion.div>
                     ))}
                   </>
                 ) : (
@@ -139,7 +171,7 @@ function Dashboard({ isOpen, toggleDrawer, user, data }: DashboardProps) {
                     </div>
                   </>
                 )}
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>

@@ -6,6 +6,7 @@
   justify-content: center;
   flex: 1;
 }
+
 .login-container-inner {
   width: 60%;
   height: 60%;
@@ -16,4 +17,10 @@
   padding: 20px;
   border-radius: 8px;
   max-width: 500px;
+}
+@media screen and (max-width: 750px) {
+  .main-container .login-container-inner {
+    width: 90%;
+    max-width: none;
+  }
 }

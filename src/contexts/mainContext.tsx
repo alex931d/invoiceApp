@@ -5,7 +5,6 @@ import { Axios } from "../config/config";
 import { Data, Project, User, Invoice } from "../models/generalModels";
 import { toast } from "react-toastify";
 import { AxiosResponse } from "axios";
-
 interface ContextState {
   serverData: Data;
   dataLoaded: boolean;

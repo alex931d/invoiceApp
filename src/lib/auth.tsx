@@ -148,25 +148,40 @@ const useAuth = () => {
 
   const logout = async (values: User) => {
     try {
-      const response = await Axios.post("/accountAPI/logout", {
-        email: values.email,
-      });
-      if (response.status === 200) {
-        signOut();
-        cookies.remove("jwt");
-        toast.success("Successfully logged out"),
-          {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          };
+      const token = cookies.get("jwt");
+      if (token || isAuthenticated) {
+        const response = await Axios.post("/accountAPI/logout", {
+          email: values.email,
+        });
+        if (response.status === 200) {
+          signOut();
+          cookies.remove("jwt");
+          toast.success("Successfully logged out"),
+            {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            };
+        } else {
+          toast.error(`Error: ${response.data.error}`),
+            {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            };
+        }
       } else {
-        toast.error(`Error: ${response.data.error}`),
+        toast.error(`Error: user not signed in!`),
           {
             position: "top-right",
             autoClose: 5000,

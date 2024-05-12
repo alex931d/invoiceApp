@@ -9,6 +9,9 @@ import {
   FormikValues,
   FormikProps,
 } from "formik";
+import { useMediaQuery } from "react-responsive";
+
+import { motion, useAnimationControls } from "framer-motion";
 import { Button, Select, DatePicker } from "antd";
 import deleteIcon from "../../../assets/icon-delete.svg";
 import { Invoice, Project } from "../../../models/generalModels";
@@ -19,7 +22,7 @@ import {
   addInvoice as AddInvoice,
 } from "../../../lib/invoiceUpdate";
 import { APIContext } from "../../../contexts/mainContext";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 interface DrawerProps {
   isOpen: boolean;
@@ -48,6 +51,13 @@ const InvoiceSchema = Yup.object().shape({
   projectDesc: Yup.string(),
 });
 const Drawer = ({ isOpen, toggleDrawer, data, invoice }: DrawerProps) => {
+  const isTablet = useMediaQuery({ query: "(max-width: 900px)" });
+  const isMobil = useMediaQuery({ query: "(max-width: 600px)" });
+  const [drawerStyles, setDrawerStyles] = useState({
+    left: "-50%",
+    width: "50%",
+  });
+  const drawerControls = useAnimationControls();
   const [randomId] = useState(generateRandomId());
   const [currentInvoice, setCurrentInvoice] = useState<
     Invoice | null | undefined
@@ -74,6 +84,22 @@ const Drawer = ({ isOpen, toggleDrawer, data, invoice }: DrawerProps) => {
       amount: 0,
     }
   );
+  useEffect(() => {
+    if (isOpen) {
+      drawerControls.start("end");
+      setDrawerStyles({
+        left: isMobil ? "0%" : isTablet ? "0%" : "80px",
+        width: isMobil ? "100%" : isTablet ? "80%" : "50%",
+      });
+    } else {
+      drawerControls.start("start");
+      setDrawerStyles({
+        left: isMobil ? "-100%" : isTablet ? "-80%" : "-50%",
+        width: isMobil ? "100%" : isTablet ? "80%" : "50%",
+      });
+    }
+  }, [isOpen, isMobil, isTablet, drawerControls]);
+
   const { updateInvoice, addInvoice } = useContext(APIContext);
   const handleAddItem = () => {
     const newItemList = [
@@ -150,7 +176,32 @@ const Drawer = ({ isOpen, toggleDrawer, data, invoice }: DrawerProps) => {
   return (
     <div>
       {isOpen && <div className="drawer-overlay" onClick={toggleDrawer}></div>}
-      <div className={`drawer-container ${isOpen ? "open" : "closed"}`}>
+      <motion.div
+        style={drawerStyles}
+        className={`drawer-container ${isOpen ? "open" : "closed"}`}
+        variants={{
+          start: {
+            left: isMobil ? "-100%" : isTablet ? "-80%" : "-50%",
+            width: isMobil ? "100%" : isTablet ? "80%" : "50%",
+            transition: {
+              type: "spring",
+              damping: 13,
+              duration: 0.6,
+            },
+          },
+          end: {
+            left: isMobil ? "0%" : isTablet ? "0%" : "80px",
+            width: isMobil ? "100%" : isTablet ? "80%" : "50%",
+            transition: {
+              type: "spring",
+              damping: 13,
+              duration: 1.4,
+            },
+          },
+        }}
+        animate={drawerControls}
+        initial="start"
+      >
         <div className="drawer-content">
           <div className="drawer-content__inner">
             <Formik
@@ -178,8 +229,9 @@ const Drawer = ({ isOpen, toggleDrawer, data, invoice }: DrawerProps) => {
                 itemList: currentInvoice?.itemList || [],
               }}
               validationSchema={InvoiceSchema}
-              onSubmit={(data) => {
+              onSubmit={(data, actions) => {
                 handleSubmit(data);
+                actions.resetForm();
               }}
             >
               <Form className="sidebar-form">
@@ -189,8 +241,32 @@ const Drawer = ({ isOpen, toggleDrawer, data, invoice }: DrawerProps) => {
                     {invoice ? " #" + currentInvoice?.uuid : ""}
                   </span>
                 </div>
-                <div className="drawer-content__inner__header__main">
-                  <div className="form-group">
+                <motion.div
+                  className="drawer-content__inner__header__main"
+                  variants={{
+                    start: { opacity: 0, x: -30 },
+
+                    end: {
+                      opacity: 1,
+                      x: 0,
+                      transition: {
+                        default: {
+                          ease: "easeInOut",
+                        },
+                        staggerChildren: 0.25,
+                      },
+                    },
+                  }}
+                  initial="start"
+                  animate={drawerControls}
+                >
+                  <motion.div
+                    className="form-group"
+                    variants={{
+                      start: { opacity: 0, x: -30 },
+                      end: { opacity: 1, x: 0 },
+                    }}
+                  >
                     <span>Bill From</span>
                     <div className="form-field">
                       <label>Street Address</label>
@@ -258,8 +334,14 @@ const Drawer = ({ isOpen, toggleDrawer, data, invoice }: DrawerProps) => {
                         />
                       </div>
                     </div>
-                  </div>
-                  <div className="form-group">
+                  </motion.div>
+                  <motion.div
+                    className="form-group"
+                    variants={{
+                      start: { opacity: 0, x: -30 },
+                      end: { opacity: 1, x: 0 },
+                    }}
+                  >
                     <span>Bill To</span>
                     <div className="form-field">
                       <label>Client's Name</label>
@@ -359,8 +441,14 @@ const Drawer = ({ isOpen, toggleDrawer, data, invoice }: DrawerProps) => {
                         />
                       </div>
                     </div>
-                  </div>
-                  <div className="form-group">
+                  </motion.div>
+                  <motion.div
+                    className="form-group"
+                    variants={{
+                      start: { opacity: 0, x: -30 },
+                      end: { opacity: 1, x: 0 },
+                    }}
+                  >
                     <div className="form-groupe__row">
                       <div className="form-field">
                         <label>currentInvoice Date</label>
@@ -451,66 +539,85 @@ const Drawer = ({ isOpen, toggleDrawer, data, invoice }: DrawerProps) => {
                         <p className="main-para form-para">Total</p>
                       </div>
                       <div className="form-items">
-                        {currentInvoice?.itemList?.map((item, index) => (
-                          <div className="form-groupe__row" key={index}>
-                            <div className="form-field">
-                              <div className="input-field">
-                                <input
-                                  type="text"
-                                  placeholder="Name"
-                                  value={item.name}
-                                  onChange={(e) =>
-                                    handleItemChange(
-                                      index,
-                                      "name",
-                                      e.target.value
-                                    )
-                                  }
-                                />
+                        <motion.section
+                          variants={{
+                            start: { opacity: 0 },
+                            end: {
+                              opacity: 1,
+                              transition: { staggerChildren: 0.3 },
+                            },
+                          }}
+                          initial="start"
+                          animate="end"
+                        >
+                          {currentInvoice?.itemList?.map((item, index) => (
+                            <motion.div
+                              className="form-groupe__row"
+                              key={index}
+                              variants={{
+                                start: { opacity: 0 },
+                                end: { opacity: 1 },
+                              }}
+                            >
+                              <div className="form-field">
+                                <div className="input-field">
+                                  <input
+                                    type="text"
+                                    placeholder="Name"
+                                    value={item.name}
+                                    onChange={(e) =>
+                                      handleItemChange(
+                                        index,
+                                        "name",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </div>
                               </div>
-                            </div>
-                            <div className="form-field">
-                              <div className="input-field">
-                                <input
-                                  type="number"
-                                  placeholder="Quantity"
-                                  value={item.qty}
-                                  onChange={(e) =>
-                                    handleItemChange(
-                                      index,
-                                      "qty",
-                                      parseInt(e.target.value)
-                                    )
-                                  }
-                                />
+                              <div className="form-field">
+                                <div className="input-field">
+                                  <input
+                                    type="number"
+                                    placeholder="Quantity"
+                                    value={item.qty}
+                                    onChange={(e) =>
+                                      handleItemChange(
+                                        index,
+                                        "qty",
+                                        parseInt(e.target.value)
+                                      )
+                                    }
+                                  />
+                                </div>
                               </div>
-                            </div>
-                            <div className="form-field">
-                              <div className="input-field">
-                                <input
-                                  type="number"
-                                  placeholder="Price"
-                                  value={item.price}
-                                  onChange={(e) =>
-                                    handleItemChange(
-                                      index,
-                                      "price",
-                                      parseFloat(e.target.value)
-                                    )
-                                  }
-                                />
+                              <div className="form-field">
+                                <div className="input-field">
+                                  <input
+                                    type="number"
+                                    placeholder="Price"
+                                    value={item.price}
+                                    onChange={(e) =>
+                                      handleItemChange(
+                                        index,
+                                        "price",
+                                        parseFloat(e.target.value)
+                                      )
+                                    }
+                                  />
+                                </div>
                               </div>
-                            </div>
-                            <div className="form-field">{item.total}</div>
-                            <span onClick={() => handleDeleteItem(index)}>
-                              <img
-                                className="form-items__delete__icon"
-                                src={deleteIcon}
-                                alt=""
-                              ></img>
-                            </span>
-                          </div>
-                        ))}
+                              <div className="form-field">{item.total}</div>
+                              <span onClick={() => handleDeleteItem(index)}>
+                                <img
+                                  className="form-items__delete__icon"
+                                  src={deleteIcon}
+                                  alt=""
+                                ></img>
+                              </span>
+                            </motion.div>
+                          ))}
+                        </motion.section>
                         <button
                           type="button"
                           className="btn edit-btn"
@@ -520,12 +627,13 @@ const Drawer = ({ isOpen, toggleDrawer, data, invoice }: DrawerProps) => {
                         </button>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
                 <div className="drawer-content__inner__header__bottom">
                   <button
                     onClick={() => {
                       toggleDrawer();
+                      isOpen = false;
                     }}
                     className="btn default-btn"
                   >
@@ -539,7 +647,7 @@ const Drawer = ({ isOpen, toggleDrawer, data, invoice }: DrawerProps) => {
             </Formik>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

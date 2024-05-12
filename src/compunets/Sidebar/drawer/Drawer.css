@@ -30,7 +30,6 @@
   left: -50%;
   background-color: var(--background-color);
   overflow-x: hidden;
-  transition: left 0.3s ease;
   z-index: 800;
   border-radius: 0px 18px 18px 0px;
 }

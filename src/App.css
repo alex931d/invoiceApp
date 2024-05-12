@@ -56,8 +56,9 @@
   color: white;
 }
 [data-theme="dark"] .ant-modal .ant-modal-content{
-  background-color: #1e2139 !important;
+  background-color: var(--light-black) !important;
 }
+
 *::after,*::before,*{
   margin: 0;
   padding: 0;

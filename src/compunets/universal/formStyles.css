@@ -60,6 +60,41 @@
   background-color: var(--light-black) !important;
   color: var(--secound-color) !important;
 }
+body:has(> #root > div[data-theme="dark"]) .ant-picker-panel-layout {
+  background-color: var(--light-black) !important;
+}
+body:has(> #root > div[data-theme="dark"])
+  .ant-picker-panel-layout
+  .ant-picker-content
+  .ant-picker-cell-in-view,
+body:has(> #root > div[data-theme="dark"])
+  .ant-picker-panel-layout
+  .ant-picker-header-view
+  button {
+  color: white !important;
+}
+body:has(> #root > div[data-theme="dark"])
+  .ant-picker-panel-layout
+  .ant-picker-header
+  button {
+  color: var(--dark-purple) !important;
+}
+body:has(> #root > div[data-theme="dark"]) .ant-select-dropdown,
+body:has(> #root > div[data-theme="dark"]) .ant-select-item-option {
+  color: var(--dark-purple) !important;
+  background-color: var(--light-black) !important;
+}
+body:has(> #root > div[data-theme="dark"]) .ant-select-item-option-active {
+  color: var(--dark-purple) !important;
+  background-color: var(--dark-black) !important;
+}
+
+body:has(> #root > div[data-theme="dark"])
+  .ant-picker-panel-layout
+  .ant-picker-header-view,
+th {
+  color: var(--dark-purple) !important;
+}
 [data-theme="dark"] .ant-picker {
   background-color: var(--light-black) !important;
   color: var(--secound-color) !important;
