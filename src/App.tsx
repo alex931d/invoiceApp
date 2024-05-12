@@ -47,20 +47,22 @@ function App() {
           <Route
             path="/dashboard"
             element={
-              <div className="main-container">
-                <div className="main-container-inner">
-                  <main>
-                    <div className="main-content">
-                      <Dashboard
-                        isOpen={isOpen}
-                        toggleDrawer={toggleDrawer}
-                        user={profile}
-                        data={project}
-                      />
-                    </div>
-                  </main>
+              <RequireAuth fallbackPath="/login">
+                <div className="main-container">
+                  <div className="main-container-inner">
+                    <main>
+                      <div className="main-content">
+                        <Dashboard
+                          isOpen={isOpen}
+                          toggleDrawer={toggleDrawer}
+                          user={profile}
+                          data={project}
+                        />
+                      </div>
+                    </main>
+                  </div>
                 </div>
-              </div>
+              </RequireAuth>
             }
           />
           <Route
